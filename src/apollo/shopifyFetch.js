@@ -1,4 +1,4 @@
-import { getStorefrontApiUrl, getPrivateTokenHeaders } from "@/shopify";
+import { getStorefrontApiUrl, getPrivateTokenHeaders } from "shopify";
 
 // This function used in next js SSR
 export async function shopifyFetch({ query, variables }) {

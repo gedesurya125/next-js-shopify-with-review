@@ -6,3 +6,4 @@ export * from "./LineQuantityAdjustButton";
 export * from "./AddToCartButton";
 export * from "./TranslatedLink";
 export * from "./LanguageSwitchLink";
+export * from "./SEO";

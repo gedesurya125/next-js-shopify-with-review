@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { pathTranslations } from "@/translations/pathTranslations";
+import { pathTranslations } from "translations/pathTranslations";
 
 const TranslatedLink = ({ href, children, sx, ...props }) => {
   const { locale } = useRouter();

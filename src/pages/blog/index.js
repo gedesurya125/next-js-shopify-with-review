@@ -3,11 +3,11 @@ import Head from "next/head";
 
 // External Components
 import { Section, Heading } from "@thepuzzlers/pieces";
-import { ProductsDisplay } from "@/components";
-import { NavigationBar } from "@/components/NavigationBar";
-import { shopifyFetch } from "@/apollo/shopifyFetch";
-import { LanguageSwitchLinkGroup } from "@/components/LanguageSwitchLinkGroup";
-import TranslatedLink from "@/components/TranslatedLink";
+import { ProductsDisplay } from "components";
+import { NavigationBar } from "components/NavigationBar";
+import { shopifyFetch } from "apollo/shopifyFetch";
+import { LanguageSwitchLinkGroup } from "components/LanguageSwitchLinkGroup";
+import TranslatedLink from "components/TranslatedLink";
 
 export default function Home({ shopifyData }) {
   return (

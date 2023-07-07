@@ -1,9 +1,9 @@
 import React from "react";
 import Head from "next/head";
-import { LegalPages, LegalPagesDe } from "@/components/library";
+import { LegalPages, LegalPagesDe } from "components/library";
 import { useRouter } from "next/router";
-import { LanguageSwitchLinkGroup } from "@/components/LanguageSwitchLinkGroup";
-import TranslatedLink from "@/components/TranslatedLink";
+import { LanguageSwitchLinkGroup } from "components/LanguageSwitchLinkGroup";
+import TranslatedLink from "components/TranslatedLink";
 
 export default function Legal() {
   const { locale } = useRouter();

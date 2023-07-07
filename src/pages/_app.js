@@ -1,7 +1,7 @@
-import "@/styles/globals.css";
+import "styles/globals.css";
 
 import { ThemeProvider } from "theme-ui";
-import theme from "@/theme";
+import theme from "theme";
 import { CartProvider, ShopifyProvider } from "@shopify/hydrogen-react";
 
 export default function App({ Component, pageProps }) {
