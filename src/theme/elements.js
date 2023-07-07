@@ -24,6 +24,10 @@ const links = {
   contact: {
     ...linkDefault,
   },
+  clear: {
+    ...linkDefault,
+    textDecoration: "none",
+  },
 };
 
 const buttons = {

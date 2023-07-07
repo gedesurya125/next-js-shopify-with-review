@@ -7,3 +7,4 @@ export * from "./AddToCartButton";
 export * from "./TranslatedLink";
 export * from "./LanguageSwitchLink";
 export * from "./SEO";
+export * from "./AspectRatioImageContainer";

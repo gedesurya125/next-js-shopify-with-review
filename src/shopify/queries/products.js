@@ -1,4 +1,4 @@
-const PRODUCT_FIELDS = `#graphql
+export const PRODUCT_FIELDS = `#graphql
   fragment productFields on Product {
     availableForSale
     createdAt
@@ -44,16 +44,33 @@ const PRODUCT_FIELDS = `#graphql
     totalInventory
     updatedAt
     vendor
+    variants(first: 10) {
+      nodes {
+        id
+        title
+        price {
+          amount
+          currencyCode
+        }
+        selectedOptions {
+          name
+          value
+        }
+        image {
+          altText
+          url
+        }
+      }
+    }
   }
 
 `;
 
-const GET_PRODUCT_BY_ID = `#graphql
+export const GET_PRODUCT_BY_ID = `#graphql
   ${PRODUCT_FIELDS}
   query getProduct ($id: ID) {
     product(id: $id) {
       ...productFields
     }
   }
-
 `;

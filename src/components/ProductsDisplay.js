@@ -5,6 +5,8 @@ import { Box, Paragraph, Button } from "@thepuzzlers/pieces";
 import Image from "next/image";
 import { ProductProvider, useCart, useMoney } from "@shopify/hydrogen-react";
 import { AddToCartButton } from "./AddToCartButton";
+import TranslatedLink from "./TranslatedLink";
+import { getShopifyProductNumber } from "helper";
 
 export const ProductsDisplay = ({ products }) => {
   return (
@@ -83,6 +85,22 @@ const ProductCard = ({ product }) => {
             return <ProductVariant variant={variant} key={index} />;
           })}
         </Box>
+        <TranslatedLink
+          href={`/${getShopifyProductNumber(id)}`}
+          sx={{
+            variant: "links.clear",
+
+            color: "primary",
+            fontSize: "1.4rem",
+            p: "1rem 2rem",
+            border: "1px solid",
+            borderColor: "primary",
+            borderRadius: "8px",
+            mt: "2rem",
+          }}
+        >
+          Open Detail
+        </TranslatedLink>
       </ProductProvider>
     </Box>
   );

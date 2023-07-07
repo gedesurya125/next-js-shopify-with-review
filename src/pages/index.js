@@ -11,12 +11,9 @@ import { shopifyFetch } from "apollo/shopifyFetch";
 import Link from "next/link";
 import TranslatedLink from "components/TranslatedLink";
 import { LanguageSwitchLinkGroup } from "components/LanguageSwitchLinkGroup";
+import { PRODUCT_FIELDS } from "shopify/queries";
 
 export default function Home({ shopifyData }) {
-  const { getStorefrontApiUrl } = useShop();
-
-  console.log("this is shopify data", getStorefrontApiUrl());
-
   return (
     <>
       <SEO title="Home" description="home description" />
@@ -64,39 +61,14 @@ export async function getServerSideProps({ locales, locale }) {
   // A Storefront API query, defined in a separate file where you make queries.
   //? language setting refer to https://shopify.dev/docs/api/storefront#directives
   const GRAPHQL_QUERY = `
+  ${PRODUCT_FIELDS}
     query products @inContext(language:${locale.toUpperCase()}) {
       shop {
         name
       }
       products(first: 10) {
         nodes {
-          id
-          images(first: 10) {
-            nodes {
-              id
-              altText
-              url
-            }
-          }
-          title
-          variants(first: 10) {
-            nodes {
-              id
-              title
-              price{
-                currencyCode
-                amount
-              }
-              selectedOptions {
-                name
-                value
-              }
-              image {
-                altText
-                url
-              }
-            }
-          }
+          ...productFields
         }
       }
     }

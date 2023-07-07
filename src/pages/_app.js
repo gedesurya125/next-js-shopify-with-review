@@ -3,6 +3,7 @@ import "styles/globals.css";
 import { ThemeProvider } from "theme-ui";
 import theme from "theme";
 import { CartProvider, ShopifyProvider } from "@shopify/hydrogen-react";
+import { Box } from "@thepuzzlers/pieces";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -25,6 +26,12 @@ export default function App({ Component, pageProps }) {
           }}
         >
           <Component {...pageProps} />
+          <Box
+            className="spacer"
+            sx={{
+              height: "20rem",
+            }}
+          />
         </CartProvider>
       </ShopifyProvider>
     </ThemeProvider>

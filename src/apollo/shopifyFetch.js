@@ -15,6 +15,15 @@ export async function shopifyFetch({ query, variables }) {
   }
 }
 
+export const queryShopifyData = async ({ query, variables }) => {
+  try {
+    const response = await shopifyFetch({ query, variables });
+    return await response.json();
+  } catch (error) {
+    console.log("error fetching shopify", error);
+  }
+};
+
 export async function getAllProducts() {
   return shopifyFetch({
     query: `{
