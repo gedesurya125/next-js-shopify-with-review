@@ -285,14 +285,6 @@ export const getStaticPaths = async () => {
       };
     }) || [];
 
-  const debugPath = {
-    params: {
-      product_id: "1",
-    },
-  };
-
-  paths.push(debugPath);
-
   return {
     paths,
     fallback: true,

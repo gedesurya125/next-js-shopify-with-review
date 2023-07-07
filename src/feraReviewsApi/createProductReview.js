@@ -11,7 +11,7 @@ export const createProductReview = async ({
       accept: "application/json",
       "content-type": "application/json",
       "SECRET-KEY": process.env.NEXT_PUBLIC_FERA_SECRET_KEY,
-      "Access-Control-Allow-Origin": true,
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       heading,
