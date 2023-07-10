@@ -7,6 +7,7 @@ const nextConfig = {
     locales: ["en", "de"],
     defaultLocale: "en",
   },
+  trailingSlash: true,
 
   async rewrites() {
     const translationsCodes = Object.keys(pathTranslations);
