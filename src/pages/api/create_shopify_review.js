@@ -1,8 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
-  console.log("this is the body", req?.body?.data);
-
   if (!req?.body?.data) return res.status(400);
 
   const options = {
