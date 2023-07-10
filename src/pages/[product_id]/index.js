@@ -21,6 +21,7 @@ import { createProductReview, getProductReviews } from "feraReviewsApi";
 import { Paragraph } from "theme-ui";
 import { AspectRatioImageContainer } from "components";
 import { Form, Formik, useField, useFormik } from "formik";
+import TranslatedLink from "components/TranslatedLink";
 
 const ProductDetailPage = ({ productDetail, productReviews }) => {
   // console.log("this i product detail", productDetail);
@@ -37,11 +38,28 @@ export default ProductDetailPage;
 
 const PageContent = ({ productReviews }) => {
   const { product, variants } = useProduct();
+  const [initialReview, setInitialReview] = React.useState(productReviews.data);
 
-  console.log("this is the product reviews", productReviews);
+  console.log("this is the product reviews", initialReview);
+
+  const addReview = (review) => {
+    setInitialReview((state) => [...state, review]);
+  };
 
   return (
     <Section as="header" id="product-detail__header">
+      <TranslatedLink
+        href="/"
+        sx={{
+          gridColumn: ["1/13"],
+          variant: "buttons.primary",
+          width: "max-content",
+          mt: "3rem",
+        }}
+      >
+        Back to home
+      </TranslatedLink>
+
       <Heading
         as="h1"
         sx={{
@@ -52,8 +70,8 @@ const PageContent = ({ productReviews }) => {
         {product.title}
       </Heading>
       <ProductImage />
-      <ReviewList productReviews={productReviews} />
-      <CreateReviewForm productId={product.id} />
+      <ReviewList productReviews={initialReview} />
+      <CreateReviewForm productId={product.id} addReview={addReview} />
     </Section>
   );
 };
@@ -109,7 +127,7 @@ const ReviewList = ({ productReviews }) => {
           gap: "2rem",
         }}
       >
-        {productReviews.data.map((review, index) => {
+        {productReviews.map((review, index) => {
           return <ReviewMessage data={review} key={index} />;
         })}
       </Box>
@@ -172,7 +190,7 @@ const ReviewMessage = ({
   );
 };
 
-const CreateReviewForm = ({ productId }) => {
+const CreateReviewForm = ({ productId, addReview }) => {
   return (
     <Box
       sx={{
@@ -190,9 +208,13 @@ const CreateReviewForm = ({ productId }) => {
           customerName: "",
           customerEmail: "",
         }}
-        onSubmit={async (values) => {
+        onSubmit={async (values, { resetForm }) => {
           console.log("this value will be submitted", values);
-          await createProductReview(values);
+          const response = await createProductReview(values);
+          if (response?.data) {
+            addReview(response.data);
+            resetForm();
+          }
         }}
       >
         {(props) => {

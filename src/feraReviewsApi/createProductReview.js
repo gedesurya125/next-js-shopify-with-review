@@ -31,6 +31,5 @@ export const createProductReview = async ({
     .then((response) => response.json())
     .catch((err) => console.error(err));
 
-  console.log("this is the response", response);
   return response;
 };
