@@ -20,9 +20,8 @@ import {
 import { createProductReview, getProductReviews } from "feraReviewsApi";
 import { Paragraph } from "theme-ui";
 import { AspectRatioImageContainer } from "components";
-import { Form, Formik, useField, useFormik } from "formik";
+import { Field, Form, Formik, useField, useFormik } from "formik";
 import TranslatedLink from "components/TranslatedLink";
-
 const ProductDetailPage = ({ productDetail, productReviews }) => {
   // console.log("this i product detail", productDetail);
   if (!productDetail?.data) return null;
@@ -139,9 +138,10 @@ const ReviewMessage = ({
   data: {
     body,
     heading,
-    product: { image_url, rating },
+    product,
     created_at,
     customer: { name, avatar_url, email },
+    rating,
   },
 }) => {
   return (
@@ -162,13 +162,13 @@ const ReviewMessage = ({
       <AspectRatioImageContainer
         aspectRatios={1}
         imgStyle={{ objectFit: "contain" }}
-        src={image_url}
+        src={product?.image_url}
         alt=""
         sx={{
           width: "10rem",
         }}
       />
-      <Paragraph>Rating: {rating.average}</Paragraph>
+      <Paragraph>Rating: {rating}</Paragraph>
       <Paragraph>Crated At: {created_at}</Paragraph>
       <Paragraph
         sx={{
@@ -207,11 +207,13 @@ const CreateReviewForm = ({ productId, addReview }) => {
           productId: getShopifyProductNumber(productId),
           customerName: "",
           customerEmail: "",
+          rating: 1,
         }}
         onSubmit={async (values, { resetForm }) => {
-          console.log("this value will be submitted", values);
           const response = await createProductReview(values);
-          if (response?.data) {
+
+          console.log("this is the response", response);
+          if (response?.data?.customer?.name) {
             addReview(response.data);
             resetForm();
           }
@@ -238,6 +240,18 @@ const CreateReviewForm = ({ productId, addReview }) => {
                 name="productId"
                 disabled
               />
+              <SelectField
+                id="rating-select"
+                name="rating"
+                label="Rating"
+                options={[
+                  { label: "1", value: 1 },
+                  { label: "2", value: 2 },
+                  { label: "3", value: 3 },
+                  { label: "4", value: 4 },
+                  { label: "5", value: 5 },
+                ]}
+              />
               <Button
                 type="submit"
                 sx={{
@@ -250,6 +264,43 @@ const CreateReviewForm = ({ productId, addReview }) => {
           );
         }}
       </Formik>
+    </Box>
+  );
+};
+
+const SelectField = ({ options, id, name, label }) => {
+  return (
+    <Box
+      sx={{
+        mt: "3rem",
+      }}
+    >
+      <Paragraph
+        as="label"
+        htmlFor={id}
+        sx={{
+          variant: "forms.label",
+        }}
+      >
+        {label}
+      </Paragraph>
+      <Field
+        component="select"
+        id={id}
+        name={name}
+        style={{
+          display: "block",
+          width: "100%",
+        }}
+      >
+        {options.map((option, index) => {
+          return (
+            <option key={index} value={option.value}>
+              {option.label}
+            </option>
+          );
+        })}
+      </Field>
     </Box>
   );
 };

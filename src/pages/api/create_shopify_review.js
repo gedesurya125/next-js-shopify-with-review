@@ -20,7 +20,9 @@ export default async function handler(req, res) {
     .then((response) => response.json())
     .catch((err) => console.error(err));
 
+  console.log("this is the response", response);
+
   res
     .status(200)
-    .json({ message: "success", data: response, payload: req.body.data });
+    .json({ message: "success", data: response, payload: req?.body?.data });
 }

@@ -4,6 +4,7 @@ export const createProductReview = async ({
   productId,
   customerName,
   customerEmail,
+  rating,
 }) => {
   const options = {
     method: "POST",
@@ -20,7 +21,7 @@ export const createProductReview = async ({
           name: customerName,
           email: customerEmail,
         },
-        rating: 4,
+        rating,
         state: "approved",
       },
     }),
